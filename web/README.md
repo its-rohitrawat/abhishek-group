@@ -3,7 +3,7 @@
 A corporate brochure site for Abhishek Group, built on the story **"For every stage of the vehicle."**
 The visual language follows the leocussen.edu.au reference: a cream canvas, a floating header, a rotating hero, rounded cards and a quote carousel. The footer pairs a gradient call-to-action panel with an offices layout, after epinternational.com. Branding, copy and code are original.
 
-**Stack:** Next.js 16 (App Router, Cache Components), TypeScript, Tailwind CSS v4, GSAP with ScrollTrigger and `@gsap/react`, Lucide icons, and Manrope + Inter via `next/font`.
+**Stack:** Next.js 16 (App Router, Cache Components), TypeScript, Tailwind CSS v4, GSAP with ScrollTrigger and `@gsap/react`, Hugeicons (free, MIT; wrapped in `src/components/ui/icons.tsx`), and Manrope + Inter via `next/font`.
 
 ## Setup
 
@@ -36,6 +36,9 @@ All copy and facts are in `src/data`, so pages update without touching component
 | `company.ts` | Name, tagline, founding year, headquarters, contact details, approved statistics, pending-content checklist |
 | `businesses.ts` | The four divisions: stage, accent colour, copy, products, images, and each hero slide's colour wash and text tone |
 | `media.ts` | Image registry: path, alt text and licence credit for every photo |
+| `groupCompanies.ts` | The 8 group companies, with descriptions and logos as published on the client's current site |
+| `customers.ts` | Customer names read from the client's published customer collage. Entries marked `confirm` were identified from logo marks |
+| `news.ts` | Press coverage from the client's current homepage news section; links open the original articles |
 | `quotes.ts` | Verbatim leadership statements (May 2022 launch announcement) used in the quote carousel |
 | `partnerships.ts` | Joint-venture countries. Partner names, logos and focus are `null` until confirmed |
 | `locations.ts` | 21 sites (city and state, as published on the current site). Street addresses are `null` until supplied |

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/ui/icons";
 import { LogoSymbol } from "@/components/brand/Logo";
 import { businesses, accentStyle, type BusinessSlug } from "@/data/businesses";
 import { cn } from "@/lib/utils";

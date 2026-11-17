@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, ChevronDown, Mail, Menu, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Mail, Menu, X } from "@/components/ui/icons";
 import { Logo } from "@/components/brand/Logo";
 import { businesses, accentStyle } from "@/data/businesses";
 import { media } from "@/data/media";
@@ -89,15 +89,17 @@ export function Header() {
   return (
     <>
       <header className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-[var(--header-top)]">
-        <div className="container-x">
+        {/* Full-width glass bar: frosted white tint + strong backdrop blur over whatever scrolls beneath. */}
+        <div className="px-3 sm:px-4 lg:px-5">
           <div
             ref={barRef}
             data-hero-reveal
             className={cn(
-              "pointer-events-auto relative flex h-[var(--header-h)] items-center rounded-[20px] px-3 transition-[background-color,box-shadow] duration-300 sm:px-5",
+              "pointer-events-auto relative flex h-[var(--header-h)] items-center rounded-[22px] border px-3 sm:px-6 lg:px-8",
+              "backdrop-blur-[40px] backdrop-saturate-[1.8] transition-[background-color,border-color,box-shadow] duration-300",
               scrolled || open
-                ? "bg-cream/95 shadow-[0_10px_40px_-20px_rgb(10_10_10/0.35)] backdrop-blur-xl"
-                : "bg-cream/80 backdrop-blur-xl",
+                ? "border-white/70 bg-white/60 shadow-[0_14px_44px_-18px_rgb(10_10_10/0.38),inset_0_1px_0_rgb(255_255_255/0.75)]"
+                : "border-white/50 bg-white/45 shadow-[0_10px_34px_-20px_rgb(10_10_10/0.32),inset_0_1px_0_rgb(255_255_255/0.65)]",
             )}
           >
             {/* Menu */}
@@ -157,7 +159,7 @@ export function Header() {
               <div
                 id="site-menu"
                 ref={panelRef}
-                className="absolute top-[calc(100%+10px)] left-0 w-full origin-top-left overflow-hidden rounded-[24px] bg-cream p-3 shadow-[0_30px_80px_-30px_rgb(10_10_10/0.45)] sm:w-[360px]"
+                className="absolute top-[calc(100%+10px)] left-0 w-full origin-top-left overflow-hidden rounded-[24px] border border-white/70 bg-cream/95 p-3 shadow-[0_30px_80px_-30px_rgb(10_10_10/0.45)] sm:w-[360px]"
               >
                 <nav aria-label="Main">
                   <ul className="max-h-[min(62vh,560px)] overflow-y-auto">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { AlertCircle, ArrowRight, CheckCircle2, Info } from "lucide-react";
+import { AlertCircle, ArrowRight, CheckCircle2, Info } from "@/components/ui/icons";
 import { enquiryCategories, type EnquiryCategory } from "@/data/navigation";
 import { LIMITS, normalise, validate, type ContactErrors, type ContactPayload } from "@/lib/contact";
 import { cn } from "@/lib/utils";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { MapPin } from "lucide-react";
+import { MapPin } from "@/components/ui/icons";
 import { sites, states, locationTypes, type LocationType } from "@/data/locations";
 import { businesses } from "@/data/businesses";
 import { gsap, useGSAP } from "@/lib/gsap";

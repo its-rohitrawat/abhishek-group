@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { ArrowRight, Pause, Play } from "@/components/ui/icons";
 import { IntroReveal } from "@/components/animations/IntroReveal";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";

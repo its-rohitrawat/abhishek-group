@@ -8,7 +8,9 @@ export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Our Businesses", href: "/businesses", mega: true },
+  { label: "Group Companies", href: "/group-companies" },
   { label: "Global Partnerships", href: "/partnerships" },
+  { label: "Customers", href: "/customers" },
   { label: "Locations", href: "/locations" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "/contact" },
@@ -17,7 +19,9 @@ export const mainNav: NavItem[] = [
 export const footerNav = {
   company: [
     { label: "About Us", href: "/about" },
+    { label: "Group Companies", href: "/group-companies" },
     { label: "Global Partnerships", href: "/partnerships" },
+    { label: "Customers", href: "/customers" },
     { label: "Locations", href: "/locations" },
     { label: "Sustainability", href: "/sustainability" },
     { label: "Careers", href: "/careers" },

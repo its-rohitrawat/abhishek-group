@@ -7,6 +7,7 @@ import { QuotesCarousel } from "@/components/home/QuotesCarousel";
 import { PartnershipsSection } from "@/components/home/PartnershipsSection";
 import { LocationsPreview } from "@/components/home/LocationsPreview";
 import { RecyclingFeature } from "@/components/home/RecyclingFeature";
+import { NewsSection } from "@/components/home/NewsSection";
 import { CareersFeature } from "@/components/home/CareersFeature";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function HomePage() {
       <PartnershipsSection />
       <LocationsPreview />
       <RecyclingFeature />
+      <NewsSection />
       <CareersFeature />
     </>
   );

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cacheLife } from "next/cache";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/ui/icons";
 import { Logo } from "@/components/brand/Logo";
 import { Reveal } from "@/components/animations/Reveal";
 import { company } from "@/data/company";
@@ -125,7 +125,9 @@ export async function Footer() {
               {[
                 ["About Us", "/about"],
                 ["Our Businesses", "/businesses"],
+                ["Group Companies", "/group-companies"],
                 ["Global Partnerships", "/partnerships"],
+                ["Customers", "/customers"],
                 ["Locations", "/locations"],
                 ["Sustainability", "/sustainability"],
                 ["Careers", "/careers"],

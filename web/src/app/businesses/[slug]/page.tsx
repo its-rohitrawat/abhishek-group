@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "@/components/ui/icons";
 import { Reveal } from "@/components/animations/Reveal";
 import { PageHero } from "@/components/sections/PageHero";
 import { BusinessGrid } from "@/components/sections/BusinessGrid";

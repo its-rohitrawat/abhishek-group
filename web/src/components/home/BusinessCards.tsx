@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, IdCard, RotateCcw, ShieldCheck, Wind } from "lucide-react";
+import { ArrowRight, IdCard, RotateCcw, ShieldCheck, Wind } from "@/components/ui/icons";
 import { Reveal } from "@/components/animations/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { businesses, accentStyle, type Business } from "@/data/businesses";

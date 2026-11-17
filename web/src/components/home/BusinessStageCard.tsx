@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/ui/icons";
 import { Reveal } from "@/components/animations/Reveal";
 import { MediaFrame } from "@/components/ui/MediaFrame";
 import { accentStyle, type Business } from "@/data/businesses";
