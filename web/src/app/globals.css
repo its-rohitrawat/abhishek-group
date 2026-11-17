@@ -23,11 +23,18 @@
   --cta-gradient: linear-gradient(105deg, #c4301c 0%, #e2512a 38%, #ee8a26 72%, #f3b42a 100%);
 
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --header-h: 80px;
-  --header-top: 16px;
+  --header-h: 58px;
+  --header-top: 12px;
   --header-offset: calc(var(--header-h) + var(--header-top) + 24px);
   --radius-card: 28px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 64px;
+    --header-top: 14px;
+  }
 }
 
 @theme inline {

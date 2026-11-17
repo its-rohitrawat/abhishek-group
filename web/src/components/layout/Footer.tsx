@@ -124,6 +124,7 @@ export async function Footer() {
             <ul className="flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem]">
               {[
                 ["About Us", "/about"],
+                ["Chairman", "/chairman"],
                 ["Our Businesses", "/businesses"],
                 ["Group Companies", "/group-companies"],
                 ["Global Partnerships", "/partnerships"],

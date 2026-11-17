@@ -95,11 +95,11 @@ export function Header() {
             ref={barRef}
             data-hero-reveal
             className={cn(
-              "pointer-events-auto relative flex h-[var(--header-h)] items-center rounded-[22px] border px-3 sm:px-6 lg:px-8",
-              "backdrop-blur-[40px] backdrop-saturate-[1.8] transition-[background-color,border-color,box-shadow] duration-300",
+              "pointer-events-auto relative flex h-[var(--header-h)] items-center rounded-full border px-1.5 sm:px-2",
+              "backdrop-blur-[28px] backdrop-saturate-[1.8] transition-[background-color,border-color,box-shadow] duration-300",
               scrolled || open
-                ? "border-white/70 bg-white/60 shadow-[0_14px_44px_-18px_rgb(10_10_10/0.38),inset_0_1px_0_rgb(255_255_255/0.75)]"
-                : "border-white/50 bg-white/45 shadow-[0_10px_34px_-20px_rgb(10_10_10/0.32),inset_0_1px_0_rgb(255_255_255/0.65)]",
+                ? "border-white/60 bg-white/65 shadow-[0_8px_28px_-14px_rgb(10_10_10/0.3),inset_0_1px_0_rgb(255_255_255/0.7)]"
+                : "border-white/40 bg-white/45 shadow-[0_6px_22px_-16px_rgb(10_10_10/0.26),inset_0_1px_0_rgb(255_255_255/0.6)]",
             )}
           >
             {/* Menu */}
@@ -109,12 +109,12 @@ export function Header() {
               aria-expanded={open}
               aria-controls="site-menu"
               onClick={() => (open ? close() : setOpen(true))}
-              className="group flex h-11 items-center gap-2.5 rounded-xl px-2 text-[1rem] font-medium"
+              className="group flex h-10 items-center gap-2 rounded-full px-3 text-[0.9375rem] font-medium transition-colors hover:bg-ink/5"
             >
               {open ? (
-                <X aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                <X aria-hidden="true" className="size-[18px]" strokeWidth={1.75} />
               ) : (
-                <Menu aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                <Menu aria-hidden="true" className="size-[18px]" strokeWidth={1.75} />
               )}
               <span className="sr-only sm:not-sr-only">Menu</span>
             </button>
@@ -126,7 +126,7 @@ export function Header() {
               onClick={close}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
-              <Logo className="scale-[0.86] sm:scale-100" />
+              <Logo className="scale-[0.8] sm:scale-[0.86]" />
             </Link>
 
             {/* Actions */}
@@ -134,23 +134,23 @@ export function Header() {
               <Link
                 href="/contact"
                 className={cn(
-                  "hidden h-11 items-center gap-2 rounded-xl px-3 text-[1rem] font-medium transition-colors hover:bg-ink/5 lg:flex",
+                  "hidden h-10 items-center gap-2 rounded-full px-3.5 text-[0.9375rem] font-medium transition-colors hover:bg-ink/5 lg:flex",
                   isActive("/contact") && "underline underline-offset-8",
                 )}
               >
-                <Mail aria-hidden="true" className="size-5" strokeWidth={1.6} />
+                <Mail aria-hidden="true" className="size-[18px]" strokeWidth={1.6} />
                 Contact
               </Link>
               <Link
                 href="/scrap-a-vehicle"
                 style={accentStyle("#2E9E5B")}
-                className="hidden h-10 items-center gap-2 rounded-[4px] bg-ink px-4 text-sm font-semibold whitespace-nowrap text-paper transition-colors hover:bg-[#262626] md:flex"
+                className="hidden h-10 items-center gap-2 rounded-full bg-ink px-[18px] text-[0.8125rem] font-semibold whitespace-nowrap text-paper transition-colors hover:bg-[#262626] md:flex"
               >
                 <span aria-hidden="true" className="accent-bg size-2 rounded-full" />
                 Scrap a Vehicle
               </Link>
-              <Link href="/contact" aria-label="Contact" className="flex size-11 items-center justify-center rounded-xl md:hidden">
-                <Mail aria-hidden="true" className="size-5" strokeWidth={1.6} />
+              <Link href="/contact" aria-label="Contact" className="flex size-10 items-center justify-center rounded-full md:hidden">
+                <Mail aria-hidden="true" className="size-[18px]" strokeWidth={1.6} />
               </Link>
             </div>
 
@@ -159,7 +159,7 @@ export function Header() {
               <div
                 id="site-menu"
                 ref={panelRef}
-                className="absolute top-[calc(100%+10px)] left-0 w-full origin-top-left overflow-hidden rounded-[24px] border border-white/70 bg-cream/95 p-3 shadow-[0_30px_80px_-30px_rgb(10_10_10/0.45)] sm:w-[360px]"
+                className="absolute top-[calc(100%+8px)] left-0 w-full origin-top-left overflow-hidden rounded-[24px] border border-white/70 bg-cream/95 p-3 shadow-[0_30px_80px_-30px_rgb(10_10_10/0.45)] sm:w-[360px]"
               >
                 <nav aria-label="Main">
                   <ul className="max-h-[min(62vh,560px)] overflow-y-auto">

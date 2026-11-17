@@ -5,6 +5,7 @@ import { businesses } from "@/data/businesses";
 const routes = [
   { path: "/", priority: 1 },
   { path: "/about", priority: 0.8 },
+  { path: "/chairman", priority: 0.6 },
   { path: "/businesses", priority: 0.9 },
   ...businesses.map((b) => ({ path: `/businesses/${b.slug}`, priority: 0.8 })),
   { path: "/group-companies", priority: 0.7 },

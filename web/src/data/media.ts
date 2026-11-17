@@ -111,6 +111,15 @@ export const media = {
     height: 1080,
     credit: {"title": "Ahmedabad–Vadodara Expressway, India (2015)", "creator": "Ridham Nagralawala ridham", "license": "CC0", "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en", "source": "https://commons.wikimedia.org/wiki/File:Ahmedabad%E2%80%93Vadodara_Expressway,_India_(2015).jpg"},
   },
+  chairman: {
+    src: "/images/chairman-portrait.jpg",
+    alt: "Mr. Dhiraj Dhar Gupta, Chairman of Abhishek Group",
+    width: 1536,
+    height: 1024,
+    // Client's own published portrait (abhishekgroup.co.in/chairman), AI-restored for sharpness.
+    // Facial detail was reconstructed: get the client's approval, or replace with an original high-res photo.
+    credit: null,
+  },
 } satisfies Record<string, Media>;
 
 export type MediaKey = keyof typeof media;
