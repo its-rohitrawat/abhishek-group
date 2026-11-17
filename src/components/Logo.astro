@@ -1,0 +1,52 @@
+---
+import Symbol from './Symbol.astro';
+
+interface Props { class?: string; }
+const { class: className } = Astro.props;
+---
+<span class:list={['logo', className]}>
+  <Symbol class="logo__symbol" />
+  <span class="logo__divider" aria-hidden="true"></span>
+  <span class="logo__type">
+    <span class="logo__name">ABHISHEK</span>
+    <span class="logo__group">GROUP</span>
+  </span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: currentColor;
+    line-height: 1;
+  }
+  .logo :global(.logo__symbol) {
+    width: 40px;
+    height: auto;
+  }
+  .logo__divider {
+    width: 1.5px;
+    height: 28px;
+    background: currentColor;
+    opacity: 0.9;
+  }
+  .logo__type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.28rem;
+    font-family: var(--font-mark);
+  }
+  .logo__name {
+    font-weight: 800;
+    font-size: 1.32rem;
+    letter-spacing: -0.01em;
+  }
+  .logo__group {
+    font-weight: 600;
+    font-size: 0.6rem;
+    letter-spacing: 0.42em;
+    margin-right: -0.42em;
+  }
+</style>

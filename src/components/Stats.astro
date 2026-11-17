@@ -1,0 +1,75 @@
+---
+import { stats } from '../data/site';
+const keys = ['safety', 'identity', 'comfort', 'recycling'];
+---
+<section class="section stats" id="group" aria-labelledby="stats-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="mono section-label">03 / The group</p>
+      <h2 id="stats-title" class="display section-title">Forty years inside the Indian vehicle.</h2>
+      <p class="section-intro">What began with seatbelts in 1984 now spans 21 sites in seven states, with partners on three continents.</p>
+    </header>
+
+    <dl class="stats__grid">
+      {stats.map((s, i) => (
+        <div class="stat" data-key={keys[i]}>
+          <dt class="stat__label">{s.label}</dt>
+          <dd class="display stat__value">{s.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .stats {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .stats :global(.section-label),
+  .stats :global(.section-intro) {
+    color: rgb(255 255 255 / 0.6);
+  }
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem var(--gutter);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-inv);
+    position: relative;
+  }
+  .stat::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .stat__value {
+    font-size: clamp(3rem, 6.2vw, 5.75rem);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat__label {
+    color: rgb(255 255 255 / 0.62);
+    font-size: 0.9375rem;
+    max-width: 26ch;
+  }
+  @media (max-width: 900px) {
+    .stats__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 480px) {
+    .stats__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

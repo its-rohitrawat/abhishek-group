@@ -1,0 +1,279 @@
+---
+import Logo from './Logo.astro';
+import { locations, businesses } from '../data/site';
+
+const states = Object.keys(locations);
+const total = Object.values(locations).reduce((n, list) => n + list.length, 0);
+const slug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="strip" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+  <div class="wrap">
+    <div class="footer__top">
+      <a href="/" class="footer__logo" aria-label="Abhishek Group, home"><Logo /></a>
+      <p class="footer__tagline display">For every stage of the vehicle.</p>
+    </div>
+
+    <section class="locs" id="locations" aria-labelledby="locs-title" data-tabs="horizontal">
+      <div class="locs__head">
+        <h2 id="locs-title" class="mono locs__title">Our locations</h2>
+        <p class="mono locs__count">{total} sites / {states.length} states</p>
+      </div>
+
+      <div class="locs__tabs" role="tablist" aria-label="States">
+        {states.map((s, i) => (
+          <button
+            class="ltab"
+            role="tab"
+            type="button"
+            id={`ltab-${slug(s)}`}
+            aria-controls={`lpanel-${slug(s)}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+          >
+            {s}<span class="ltab__n">{locations[s].length}</span>
+          </button>
+        ))}
+      </div>
+
+      {states.map((s, i) => (
+        <ul
+          class="locs__panel"
+          role="tabpanel"
+          id={`lpanel-${slug(s)}`}
+          aria-labelledby={`ltab-${slug(s)}`}
+          hidden={i !== 0}
+          tabindex="0"
+        >
+          {locations[s].map((l) => (
+            <li class="loc">
+              <span class="loc__city">{l.city}</span>
+              <span class="mono loc__type">{l.type}</span>
+              <span class="loc__company">{l.company}</span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </section>
+
+    <div class="footer__cols">
+      <nav aria-label="Group">
+        <h2 class="mono footer__h">Group</h2>
+        <ul>
+          <li><a href="#group">About us</a></li>
+          <li><a href="#group">History</a></li>
+          <li><a href="#group">Leadership</a></li>
+          <li><a href="#contact">Careers</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Businesses">
+        <h2 class="mono footer__h">Businesses</h2>
+        <ul>
+          {businesses.map((b) => (
+            <li data-key={b.key}><a href={`#biz-${b.key}`}><i aria-hidden="true"></i>{b.name}</a></li>
+          ))}
+        </ul>
+      </nav>
+      <nav aria-label="Partners">
+        <h2 class="mono footer__h">Explore</h2>
+        <ul>
+          <li><a href="#partners">Global partners</a></li>
+          <li><a href="#values">Sustainability</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#">News</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="mono footer__h">Corporate office</h2>
+        <address class="footer__address">
+          Chairman's Office<br />
+          Gurugram, Haryana<br />
+          India
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="mono">&copy; {year} Abhishek Group. All rights reserved.</p>
+      <ul class="footer__legal">
+        <li><a class="mono" href="#">Privacy policy</a></li>
+        <li><a class="mono" href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding-block: clamp(3.5rem, 7vw, 5.5rem) clamp(2.5rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--line-inv);
+  }
+  .footer__logo {
+    color: var(--paper);
+  }
+  .footer__tagline {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  /* Locations */
+  .locs {
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--line-inv);
+    scroll-margin-top: var(--header-h);
+  }
+  .locs__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .locs__title {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .locs__count {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .locs__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .ltab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 40px;
+    padding: 0 1rem;
+    border: 1px solid var(--line-inv);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    color: rgb(255 255 255 / 0.75);
+    transition:
+      background-color 200ms var(--ease-out),
+      color 200ms var(--ease-out),
+      border-color 200ms var(--ease-out);
+  }
+  .ltab__n {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    opacity: 0.6;
+  }
+  .ltab[aria-selected='true'] {
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ltab:not([aria-selected='true']):hover {
+      border-color: rgb(255 255 255 / 0.5);
+      color: var(--paper);
+    }
+  }
+  .locs__panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--line-inv);
+    border: 1px solid var(--line-inv);
+  }
+  .locs__panel[hidden] {
+    display: none;
+  }
+  .loc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.1rem 1.25rem;
+    background: var(--ink);
+  }
+  .loc__city {
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: 1.0625rem;
+  }
+  .loc__type {
+    font-size: 0.65rem;
+    color: rgb(255 255 255 / 0.55);
+  }
+  .loc__company {
+    font-size: 0.875rem;
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  /* Columns */
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem var(--gutter);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+  .footer__h {
+    color: rgb(255 255 255 / 0.5);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    margin-bottom: 1.1rem;
+  }
+  .footer__cols ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .footer__cols a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgb(255 255 255 / 0.85);
+    transition: color 180ms var(--ease-out);
+  }
+  .footer__cols a i {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .footer__cols a:hover {
+      color: var(--paper);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+  .footer__address {
+    font-style: normal;
+    color: rgb(255 255 255 / 0.85);
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid var(--line-inv);
+    color: rgb(255 255 255 / 0.5);
+  }
+  .footer__bottom .mono {
+    font-size: 0.6875rem;
+  }
+  .footer__legal {
+    display: flex;
+    gap: 1.5rem;
+  }
+  @media (max-width: 860px) {
+    .footer__cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

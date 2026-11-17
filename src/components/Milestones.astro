@@ -1,0 +1,80 @@
+---
+import Placeholder from './Placeholder.astro';
+import Arrow from './Arrow.astro';
+import { milestones } from '../data/site';
+---
+<section class="section milestones" aria-labelledby="milestones-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="mono section-label">06 / Milestones</p>
+      <h2 id="milestones-title" class="display section-title">Recent milestones.</h2>
+      <p class="section-intro"><a class="link" href="#">All news <Arrow /></a></p>
+    </header>
+
+    <ul class="mcards">
+      {milestones.map((m) => (
+        <li data-key={m.key}>
+          <article class="mcard">
+            <Placeholder label="Photo: to be supplied" ratio="16 / 10" />
+            <span class="mcard__bar" aria-hidden="true"></span>
+            <p class="mono mcard__date">{m.date}</p>
+            <h3 class="mcard__title"><a href="#">{m.title}</a></h3>
+            <p class="mcard__body">{m.body}</p>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .mcards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem var(--gutter);
+  }
+  .mcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .mcard__bar {
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 0.75rem;
+    transition: width 320ms var(--ease-out);
+  }
+  .mcard__date {
+    color: var(--muted);
+  }
+  .mcard__title {
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: 1.3125rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  /* Whole card is clickable via the title link */
+  .mcard__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .mcard__body {
+    color: var(--muted);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .mcard:hover .mcard__bar {
+      width: 100%;
+    }
+  }
+  @media (max-width: 900px) {
+    .mcards {
+      grid-template-columns: 1fr;
+      max-width: 560px;
+    }
+  }
+</style>

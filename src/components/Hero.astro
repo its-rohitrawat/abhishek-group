@@ -1,0 +1,376 @@
+---
+import Symbol from './Symbol.astro';
+import Arrow from './Arrow.astro';
+import { businesses, partners } from '../data/site';
+
+// Lifecycle dial geometry
+const C = 240;
+const R = 178;
+const GAP = 5; // degrees between arcs
+const rad = (deg: number) => (deg * Math.PI) / 180;
+const pt = (deg: number, r: number) => [C + r * Math.cos(rad(deg)), C + r * Math.sin(rad(deg))].map((n) => +n.toFixed(2));
+
+const arcs = businesses.map((b, i) => {
+  const a1 = -90 + i * 90 + GAP;
+  const a2 = -90 + (i + 1) * 90 - GAP;
+  const [x1, y1] = pt(a1, R);
+  const [x2, y2] = pt(a2, R);
+  return { key: b.key, d: `M ${x1} ${y1} A ${R} ${R} 0 0 1 ${x2} ${y2}` };
+});
+
+const ticks = Array.from({ length: 72 }, (_, i) => {
+  const deg = i * 5 - 90;
+  const major = i % 18 === 0;
+  const r1 = 150;
+  const r2 = major ? 136 : 144;
+  const [x1, y1] = pt(deg, r1);
+  const [x2, y2] = pt(deg, r2);
+  return { x1, y1, x2, y2, major };
+});
+
+const corners = ['tr', 'br', 'bl', 'tl'];
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="mono hero__meta" data-reveal>
+        <span>Est. 1984</span>
+        <span aria-hidden="true">/</span>
+        <span>Gurugram, Haryana</span>
+        <span aria-hidden="true" class="hero__meta-coord">/</span>
+        <span class="hero__meta-coord">28.46° N, 77.03° E</span>
+      </p>
+
+      <h1 id="hero-title" class="display hero__title">
+        <span class="hero__line"><span data-reveal-line>For every</span></span>
+        <span class="hero__line"><span data-reveal-line>stage of the</span></span>
+        <span class="hero__line"><span data-reveal-line>vehicle.</span></span>
+      </h1>
+
+      <p class="hero__lede" data-reveal>
+        Since 1984 we have built the systems that keep people safe, the plates that give every vehicle its
+        identity, the comfort that makes it livable, and the facility that returns it to raw material.{' '}
+        <strong>Four businesses. One responsibility.</strong>
+      </p>
+
+      <div class="hero__ctas" data-reveal>
+        <a class="btn" href="#businesses">Explore our businesses <Arrow /></a>
+        <a class="btn btn--ghost" href="#contact">Scrap a vehicle <Arrow /></a>
+      </div>
+    </div>
+
+    <div class="hero__dial" data-dial>
+      <svg class="dial__svg" viewBox="0 0 480 480" aria-hidden="true" focusable="false">
+        <circle class="dial__guide" cx={C} cy={C} r={R} />
+        <g class="dial__ticks" data-dial-ticks>
+          {ticks.map((t) => (
+            <line x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2} class:list={{ major: t.major }} />
+          ))}
+        </g>
+        {arcs.map((a) => (
+          <path class="dial__arc" data-key={a.key} d={a.d} pathLength="1" data-dial-arc />
+        ))}
+        <path class="dial__loop" d="M 233 52 L 245 62 L 233 72" data-dial-loop />
+      </svg>
+
+      <div class="dial__center" data-dial-center>
+        <Symbol class="dial__symbol" />
+      </div>
+
+      <ul class="dial__labels">
+        {businesses.map((b, i) => (
+          <li class={`dial__label dial__label--${corners[i]}`} data-key={b.key} data-dial-label>
+            <a href={`#biz-${b.key}`} data-dial-link={b.key}>
+              <span class="mono dial__stage"><i aria-hidden="true"></i>{b.stageNo} {b.stage}</span>
+              <span class="dial__name">{b.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="mono dial__caption" data-reveal-fade>And then it starts again</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero__partners" data-reveal>
+      <p class="mono hero__partners-label">In partnership with</p>
+      <ul class="hero__partners-list">
+        {partners.map((p) => (
+          <li><span class="hero__partner">{p.name}</span><span class="mono hero__country">{p.country}</span></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2rem var(--gutter);
+    align-items: center;
+  }
+  .hero__copy {
+    grid-column: 1 / span 7;
+  }
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    color: var(--muted);
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .hero__title {
+    font-size: clamp(2.75rem, 7.4vw, 7.25rem);
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  }
+  .hero__line {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+  }
+  .hero__line > span {
+    display: block;
+  }
+  .motion [data-reveal-line] {
+    transform: translateY(105%);
+  }
+  .hero__lede {
+    max-width: 52ch;
+    color: var(--muted);
+    font-size: 1.125rem;
+    margin-bottom: 2.25rem;
+  }
+  .hero__lede strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  /* Dial */
+  .hero__dial {
+    grid-column: 8 / -1;
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    justify-self: end;
+    aspect-ratio: 1;
+  }
+  .dial__svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .dial__guide {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .dial__ticks line {
+    stroke: rgb(10 10 10 / 0.28);
+    stroke-width: 1;
+  }
+  .dial__ticks line.major {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+  .dial__arc {
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap: butt;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition:
+      stroke-width 260ms var(--ease-out),
+      opacity 260ms var(--ease-out);
+  }
+  .motion .dial__arc {
+    stroke-dashoffset: 1;
+  }
+  .dial__arc[data-key='safety'] { stroke: var(--safety); }
+  .dial__arc[data-key='identity'] { stroke: var(--identity); }
+  .dial__arc[data-key='comfort'] { stroke: var(--comfort); }
+  .dial__arc[data-key='recycling'] { stroke: var(--recycling); }
+
+  .dial__loop {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2;
+  }
+
+  .hero__dial[data-active] .dial__arc {
+    opacity: 0.18;
+  }
+  .hero__dial[data-active='safety'] .dial__arc[data-key='safety'],
+  .hero__dial[data-active='identity'] .dial__arc[data-key='identity'],
+  .hero__dial[data-active='comfort'] .dial__arc[data-key='comfort'],
+  .hero__dial[data-active='recycling'] .dial__arc[data-key='recycling'] {
+    opacity: 1;
+    stroke-width: 20;
+  }
+  .hero__dial[data-active] .dial__label {
+    opacity: 0.35;
+  }
+  .hero__dial[data-active='safety'] .dial__label[data-key='safety'],
+  .hero__dial[data-active='identity'] .dial__label[data-key='identity'],
+  .hero__dial[data-active='comfort'] .dial__label[data-key='comfort'],
+  .hero__dial[data-active='recycling'] .dial__label[data-key='recycling'] {
+    opacity: 1;
+  }
+
+  .dial__center {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+  }
+  .dial__center :global(.dial__symbol) {
+    width: 30%;
+    color: var(--ink);
+    transition: color 260ms var(--ease-out);
+  }
+  .hero__dial[data-active] :global(.dial__symbol) {
+    color: var(--accent);
+  }
+
+  .dial__labels {
+    position: absolute;
+    inset: 0;
+  }
+  .dial__label {
+    position: absolute;
+    transition: opacity 260ms var(--ease-out);
+  }
+  .dial__label a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.25rem;
+  }
+  .dial__label--tr { top: 0; right: 0; text-align: right; }
+  .dial__label--br { bottom: 0; right: 0; text-align: right; }
+  .dial__label--bl { bottom: 0; left: 0; }
+  .dial__label--tl { top: 0; left: 0; }
+  .dial__label--tr a,
+  .dial__label--br a {
+    align-items: flex-end;
+  }
+  .dial__stage {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--muted);
+    font-size: 0.6875rem;
+  }
+  .dial__stage i {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+  .dial__name {
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .dial__caption {
+    position: absolute;
+    left: 50%;
+    top: 3%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.625rem;
+    color: var(--muted);
+  }
+
+  /* Partner strip */
+  .hero__partners {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem 2.5rem;
+    flex-wrap: wrap;
+    margin-top: clamp(3.5rem, 7vw, 6rem);
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero__partners-label {
+    color: var(--muted);
+  }
+  .hero__partners-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.5rem;
+  }
+  .hero__partners-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .hero__partner {
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .hero__country {
+    font-size: 0.6875rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 1080px) {
+    .hero__copy {
+      grid-column: 1 / -1;
+    }
+    .hero__dial {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 520px;
+      margin-top: 1rem;
+    }
+  }
+  @media (max-width: 560px) {
+    .hero__meta-coord,
+    .dial__caption {
+      display: none;
+    }
+    .dial__name {
+      font-size: 0.875rem;
+    }
+    .dial__stage {
+      font-size: 0.625rem;
+    }
+  }
+</style>
+
+<script>
+  // Hover / focus a stage label: highlight its arc on the dial.
+  const dial = document.querySelector<HTMLElement>('[data-dial]');
+  if (dial) {
+    const setActive = (key: string | null) => {
+      if (key) {
+        dial.dataset.active = key;
+        dial.dataset.key = key;
+      } else {
+        delete dial.dataset.active;
+        delete dial.dataset.key;
+      }
+    };
+    dial.querySelectorAll<HTMLAnchorElement>('[data-dial-link]').forEach((link) => {
+      const key = link.dataset.dialLink ?? null;
+      link.addEventListener('pointerenter', () => setActive(key));
+      link.addEventListener('pointerleave', () => setActive(null));
+      link.addEventListener('focus', () => setActive(key));
+      link.addEventListener('blur', () => setActive(null));
+    });
+  }
+</script>

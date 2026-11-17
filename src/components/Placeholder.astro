@@ -1,0 +1,62 @@
+---
+/** Art-directed image placeholder for the draft. Swap for real photography. */
+interface Props { label: string; class?: string; ratio?: string; dark?: boolean; }
+const { label, class: className, ratio = '4 / 3', dark = false } = Astro.props;
+---
+<figure class:list={['ph', { 'ph--dark': dark }, className]} style={`aspect-ratio:${ratio}`} role="img" aria-label={`Image placeholder: ${label}`}>
+  <span class="ph__corner ph__corner--tl" aria-hidden="true"></span>
+  <span class="ph__corner ph__corner--br" aria-hidden="true"></span>
+  <figcaption class="ph__label mono">{label}</figcaption>
+</figure>
+
+<style>
+  .ph {
+    position: relative;
+    width: 100%;
+    background-color: var(--paper-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgb(10 10 10 / 0.055) 0 1px,
+      transparent 1px 14px
+    );
+    overflow: hidden;
+  }
+  .ph--dark {
+    background-color: var(--ink-2);
+    background-image: repeating-linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.06) 0 1px,
+      transparent 1px 14px
+    );
+    color: rgb(255 255 255 / 0.6);
+  }
+  .ph__label {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.6875rem;
+    color: var(--muted);
+  }
+  .ph--dark .ph__label {
+    color: rgb(255 255 255 / 0.55);
+  }
+  .ph__corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: currentColor;
+    border-style: solid;
+    opacity: 0.35;
+  }
+  .ph__corner--tl {
+    top: 1rem;
+    left: 1rem;
+    border-width: 1px 0 0 1px;
+  }
+  .ph__corner--br {
+    right: 1rem;
+    bottom: 1rem;
+    border-width: 0 1px 1px 0;
+  }
+</style>

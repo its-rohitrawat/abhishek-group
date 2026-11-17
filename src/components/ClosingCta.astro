@@ -1,0 +1,88 @@
+---
+import Symbol from './Symbol.astro';
+import Arrow from './Arrow.astro';
+---
+<section class="cta" id="contact" aria-labelledby="cta-title">
+  <div class="wrap cta__inner">
+    <div class="cta__copy">
+      <p class="mono section-label">Contact</p>
+      <h2 id="cta-title" class="display cta__title">Let's talk about the next stage.</h2>
+      <p class="cta__body">
+        Whether you build vehicles, regulate them or need to retire one, our team in Gurugram will point you to the right
+        business.
+      </p>
+      <div class="cta__actions">
+        <a class="btn" href="#contact">Talk to our team <Arrow /></a>
+        <a class="btn btn--ghost" href="#contact">Scrap a vehicle <Arrow /></a>
+      </div>
+    </div>
+    <div class="cta__mark" aria-hidden="true">
+      <Symbol class="cta__symbol" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+  }
+  .cta__inner {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    align-items: center;
+    padding-block: clamp(5rem, 11vw, 9rem);
+  }
+  .cta__copy {
+    grid-column: 1 / span 8;
+    position: relative;
+    z-index: 1;
+  }
+  .cta__copy .section-label {
+    margin-bottom: 1.5rem;
+  }
+  .cta__title {
+    font-size: clamp(2.5rem, 6.4vw, 6rem);
+    margin-bottom: 1.75rem;
+  }
+  .cta__body {
+    color: var(--muted);
+    max-width: 50ch;
+    font-size: 1.125rem;
+    margin-bottom: 2.25rem;
+  }
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .cta__mark {
+    grid-column: 9 / -1;
+    justify-self: end;
+    width: 100%;
+    max-width: 380px;
+  }
+  .cta__mark :global(.cta__symbol) {
+    width: 100%;
+    color: transparent;
+    stroke: var(--ink);
+    stroke-width: 1.25;
+  }
+  .cta__mark :global(path) {
+    vector-effect: non-scaling-stroke;
+  }
+  @media (max-width: 900px) {
+    .cta__copy {
+      grid-column: 1 / -1;
+    }
+    .cta__mark {
+      position: absolute;
+      right: -18%;
+      bottom: -12%;
+      width: 70%;
+      opacity: 0.12;
+    }
+  }
+</style>

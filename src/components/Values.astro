@@ -1,0 +1,84 @@
+---
+import Placeholder from './Placeholder.astro';
+import { values } from '../data/site';
+---
+<section class="section values" id="values" aria-labelledby="values-title">
+  <div class="wrap values__grid">
+    <Placeholder label="Photo: plant floor, Manesar" ratio="4 / 5" class="values__media" dark />
+
+    <div class="values__copy">
+      <p class="mono section-label">05 / Why Abhishek</p>
+      <h2 id="values-title" class="display values__title">Engineered for responsibility.</h2>
+      <ol class="values__list">
+        {values.map((v, i) => (
+          <li>
+            <span class="mono values__no">0{i + 1}</span>
+            <div>
+              <h3 class="values__name">{v.title}</h3>
+              <p class="values__body">{v.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .values {
+    background: var(--paper-2);
+  }
+  .values__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--gutter);
+    align-items: center;
+  }
+  .values__grid :global(.values__media) {
+    grid-column: 1 / span 5;
+  }
+  .values__copy {
+    grid-column: 7 / -1;
+  }
+  .values__copy .section-label {
+    margin-bottom: 1.5rem;
+  }
+  .values__title {
+    font-size: clamp(2.125rem, 4.6vw, 4rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .values__list {
+    border-top: 1px solid var(--ink);
+  }
+  .values__list li {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .values__no {
+    color: var(--muted);
+    padding-top: 0.35rem;
+  }
+  .values__name {
+    font-stretch: 115%;
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+  }
+  .values__body {
+    color: var(--muted);
+    max-width: 46ch;
+  }
+  @media (max-width: 900px) {
+    .values__grid :global(.values__media),
+    .values__copy {
+      grid-column: 1 / -1;
+    }
+    .values__grid :global(.values__media) {
+      aspect-ratio: 16 / 10 !important;
+    }
+  }
+</style>

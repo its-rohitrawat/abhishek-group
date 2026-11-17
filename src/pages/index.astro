@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Audiences from '../components/Audiences.astro';
+import Businesses from '../components/Businesses.astro';
+import Stats from '../components/Stats.astro';
+import Partners from '../components/Partners.astro';
+import Values from '../components/Values.astro';
+import Milestones from '../components/Milestones.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Audiences />
+    <Businesses />
+    <Stats />
+    <Partners />
+    <Values />
+    <Milestones />
+    <ClosingCta />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import '../scripts/motion';
+  import '../scripts/tabs';
+</script>

@@ -1,0 +1,214 @@
+---
+import Placeholder from './Placeholder.astro';
+import Arrow from './Arrow.astro';
+import { partners } from '../data/site';
+---
+<section class="section partners" id="partners" aria-labelledby="partners-title">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="mono section-label">04 / Global partners</p>
+      <h2 id="partners-title" class="display section-title">Built with specialists from three continents.</h2>
+      <p class="section-intro">Every business is a joint venture with a global leader in its field, bringing proven technology to Indian manufacturing.</p>
+    </header>
+
+    <div class="partners__layout" data-tabs="vertical">
+      <div class="partners__tabs" role="tablist" aria-label="Partners" aria-orientation="vertical">
+        {partners.map((p, i) => (
+          <button
+            class="ptab"
+            role="tab"
+            type="button"
+            id={`ptab-${p.id}`}
+            aria-controls={`ppanel-${p.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-key={p.key}
+          >
+            <span class="ptab__dot" aria-hidden="true"></span>
+            <span class="ptab__name">{p.name}</span>
+            <span class="mono ptab__country">{p.country}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="partners__panels">
+        {partners.map((p, i) => (
+          <article
+            class="ppanel"
+            role="tabpanel"
+            id={`ppanel-${p.id}`}
+            aria-labelledby={`ptab-${p.id}`}
+            hidden={i !== 0}
+            data-key={p.key}
+            tabindex="0"
+          >
+            <div class="ppanel__copy">
+              <p class="mono ppanel__venture"><span aria-hidden="true"></span>{p.venture}</p>
+              <h3 class="ppanel__headline">{p.headline}</h3>
+              <p class="ppanel__body">{p.body}</p>
+              <dl class="ppanel__facts">
+                {p.facts.map((f, n) => (
+                  <div>
+                    <dt class="mono">0{n + 1}</dt>
+                    <dd>{f}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a class="link" href="#contact">Work with this venture <Arrow /></a>
+            </div>
+            <Placeholder label={p.imageLabel} ratio="4 / 5" class="ppanel__media" />
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: var(--gutter);
+    align-items: start;
+  }
+  .partners__tabs {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--ink);
+  }
+  .ptab {
+    display: grid;
+    grid-template-columns: 10px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1.35rem 0.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    transition: color 220ms var(--ease-out);
+  }
+  .ptab__dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    transform: scale(0.6);
+    opacity: 0.5;
+    transition:
+      transform 260ms var(--ease-out),
+      opacity 260ms var(--ease-out);
+  }
+  .ptab__name {
+    font-stretch: 115%;
+    font-weight: 600;
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    letter-spacing: -0.01em;
+  }
+  .ptab__country {
+    font-size: 0.6875rem;
+  }
+  .ptab[aria-selected='true'] {
+    color: var(--ink);
+  }
+  .ptab[aria-selected='true'] .ptab__dot {
+    transform: scale(1);
+    opacity: 1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .ptab:hover {
+      color: var(--ink);
+    }
+  }
+
+  .ppanel {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--gutter);
+    align-items: start;
+  }
+  .ppanel[hidden] {
+    display: none;
+  }
+  .ppanel:focus-visible {
+    outline-offset: 8px;
+  }
+  .ppanel__venture {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .ppanel__venture span {
+    width: 24px;
+    height: 3px;
+    background: var(--accent);
+  }
+  .ppanel__headline {
+    font-stretch: 118%;
+    font-weight: 600;
+    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .ppanel__body {
+    color: var(--muted);
+    max-width: 48ch;
+    margin-bottom: 2rem;
+  }
+  .ppanel__facts {
+    border-top: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+  .ppanel__facts div {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .ppanel__facts dt {
+    color: var(--muted);
+    font-size: 0.6875rem;
+    align-self: center;
+  }
+  .ppanel__facts dd {
+    font-weight: 500;
+  }
+
+  @media (max-width: 1080px) {
+    .partners__layout {
+      grid-template-columns: 1fr;
+    }
+    .partners__tabs {
+      flex-direction: row;
+      overflow-x: auto;
+      border-top: 0;
+      border-bottom: 1px solid var(--line);
+      scrollbar-width: none;
+    }
+    .ptab {
+      grid-template-columns: 10px auto;
+      width: auto;
+      flex: none;
+      padding: 1rem 1.25rem 1rem 0;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .ptab[aria-selected='true'] {
+      border-bottom-color: var(--ink);
+    }
+    .ptab__country {
+      display: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .ppanel {
+      grid-template-columns: 1fr;
+    }
+    .ppanel :global(.ppanel__media) {
+      aspect-ratio: 16 / 10 !important;
+      order: -1;
+    }
+  }
+</style>

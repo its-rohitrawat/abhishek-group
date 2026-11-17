@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------
+   Abhishek Group design tokens
+   Warm cream canvas, white cards, black type; one accent per division.
+---------------------------------------------------------------- */
+:root {
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --cream: #f7f3ec; /* page canvas */
+  --offwhite: #efe8dd; /* alternate band */
+  --surface: #e6ddcf;
+  --muted: #6b6760;
+  --line: #e2d9cc;
+  --line-dark: rgb(255 255 255 / 0.16);
+
+  --safety: #e5432d;
+  --identity: #1d4ed8;
+  --comfort: #22b8cf;
+  --recycling: #2e9e5b;
+
+  /* Warm call-to-action wash */
+  --cta-gradient: linear-gradient(105deg, #c4301c 0%, #e2512a 38%, #ee8a26 72%, #f3b42a 100%);
+
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 72px;
+  --header-top: 16px;
+  --header-offset: calc(var(--header-h) + var(--header-top) + 24px);
+  --radius-card: 28px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-cream: var(--cream);
+  --color-offwhite: var(--offwhite);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-safety: var(--safety);
+  --color-identity: var(--identity);
+  --color-comfort: var(--comfort);
+  --color-recycling: var(--recycling);
+
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--header-offset);
+  background: var(--cream);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--identity);
+  outline-offset: 3px;
+}
+
+/* Hero intro: hidden only while JS motion is active (failsafe in layout). */
+.js-motion [data-hero-reveal] {
+  opacity: 0;
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+
+  .section-y {
+    padding-block: clamp(4.5rem, 9vw, 8rem);
+  }
+
+  .card {
+    background: var(--paper);
+    border-radius: var(--radius-card);
+  }
+
+  /* Accent driven by --accent set inline from data */
+  .accent-bg {
+    background-color: var(--accent);
+  }
+  .accent-text {
+    color: var(--accent);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
